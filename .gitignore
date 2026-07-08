@@ -12,5 +12,6 @@ client/node_modules/
 # Keep example templates in git
 !server/.env.example
 !client/.env.example
+!client/.env.production
 
 .vscode/
