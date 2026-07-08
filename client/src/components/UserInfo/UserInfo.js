@@ -9,6 +9,7 @@ import FollowingDialog from './FollowingDialog.js';
 import DeleteAccountDialog from './DeleteAccountDialog.js';
 
 function UserInfo( {user} ){
+  const apiBaseUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
     const [editOpen, setEditOpen] = useState(false);
     const [newBio, setNewBio] = useState('');
@@ -83,7 +84,7 @@ function UserInfo( {user} ){
         await api.delete('/user/delete-account');
 
         if (localUser.authMethod === 'google') {
-          window.open('http://localhost:5000/auth/logout/google', '_blank');
+          window.open(`${apiBaseUrl}/auth/logout/google`, '_blank');
           localStorage.clear();
         } else {
             try{

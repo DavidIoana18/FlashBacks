@@ -9,6 +9,7 @@ import './AuthForm.css';
 import styles from '../../components/Button/Button.module.css'; 
 
 function AuthForm () {
+  const apiBaseUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   const [formData, setFormData] = useState({   // State for user input
       firstName: "",
@@ -59,7 +60,7 @@ function AuthForm () {
   async function handleSubmit(event){
     event.preventDefault(); // Prevent default browser behavior (refreshing the page)
       try {
-          const url = `http://localhost:5000/auth/${isRegistered ? 'login' : 'register'}`;
+          const url = `${apiBaseUrl}/auth/${isRegistered ? 'login' : 'register'}`;
           const body = isRegistered ? {email: formData.email, password: formData.password} : formData;
 
           const response = await api.post(url, body);
@@ -108,7 +109,7 @@ function AuthForm () {
   }
 
   function handleGoogleLogin() {
-    window.location.href = 'http://localhost:5000/auth/google?prompt=select_account';
+    window.location.href = `${apiBaseUrl}/auth/google?prompt=select_account`;
   }
 
   function handleOnClick(){
