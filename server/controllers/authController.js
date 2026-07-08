@@ -62,13 +62,13 @@ async function googleAuth(req, res, next){
 // Google callback after user grants permissions
 // Google oauth use GET method so we can't send the error messages in a JSON format, we have to send them as query parameters
 async function googleCallback(req, res, next) {
-    passport.authenticate('google', {session:false, failureRedirect: 'http://localhost:3000/auth/register'}, (err, user, info) =>{
+    passport.authenticate('google', {session:false, failureRedirect: 'https://flash-backs.vercel.app/auth/register'}, (err, user, info) =>{
         if(err){
-            return res.redirect(`http://localhost:3000/auth/register?error=${encodeURIComponent(err)}`); // encode the error message because it may contain special characters
+            return res.redirect(`https://flash-backs.vercel.app/auth/register?error=${encodeURIComponent(err)}`);
         }
         
         if(!user){
-            return res.redirect(`http://localhost:3000/auth/register?error=${encodeURIComponent(info?.message || 'Authentication failed')}`);
+            return res.redirect(`https://flash-backs.vercel.app/auth/register?error=${encodeURIComponent(info?.message || 'Authentication failed')}`);
         }
         
         const token = jwt.sign(
@@ -77,7 +77,7 @@ async function googleCallback(req, res, next) {
             {expiresIn: '3h'}
         );
         // if the google authentication is successful, redirect the user to the memories page with the token
-        res.redirect(`http://localhost:3000/profile/${user.id}?token=${token}`);
+        res.redirect(`https://flash-backs.vercel.app/profile/${user.id}?token=${token}`);
         
     })(req, res, next);
 }
