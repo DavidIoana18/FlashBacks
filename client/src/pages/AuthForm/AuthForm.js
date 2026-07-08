@@ -23,7 +23,6 @@ function AuthForm () {
   const isRegistered = location.pathname === "/auth/login"; //State to check if the user is registered or not for login or register form
 
   const [error, setError] = useState(null);       // State for error message
-  const [message, setMessage] = useState(null);   // State for success message
               
    // after Google authentication fails, the backend redirects with an error message in the URL
   useEffect(() => {
@@ -76,7 +75,6 @@ function AuthForm () {
             localStorage.setItem('registeredUser', 'true');
             navigate('/auth/login');
           }
-          setMessage(response.data.message); // set the success message 
 
           // reset form data
           setFormData({
@@ -85,10 +83,6 @@ function AuthForm () {
             email: "",
             password: ""
           });
-
-          setTimeout(() => {    // Reset the message to null after a short delay (before redirection)
-            setMessage(null);  
-          }, 9000); // 9 seconds delay 
 
       } catch (error) {
         if(error.response){

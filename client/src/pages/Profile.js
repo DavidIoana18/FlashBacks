@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {useParams} from 'react-router-dom';
 import UserInfo from '../components/UserInfo/UserInfo.js';
 import Memories from '../components/Memories.js';
@@ -10,7 +10,7 @@ function Profile(){
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
-    async function fetchUser(){
+    const fetchUser = useCallback(async () => {
         try{
             const response = await api.get(`/user/${userId}`);
             // console.log('User fetched successfully:', response.data.user);
@@ -20,7 +20,7 @@ function Profile(){
         }finally{
             setLoading(false);
         }
-    } 
+    }, [userId]); 
 
     useEffect( () =>{ // fetch user data when the component mounts
         setLoading(true);
