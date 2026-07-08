@@ -26,7 +26,7 @@ function Profile(){
         setLoading(true);
         setError('');
         fetchUser();
-    }, [userId]);
+    }, [userId, fetchUser]);
 
     function handleMemoryChange(){
       fetchUser(); // refresh the user data after memory count change

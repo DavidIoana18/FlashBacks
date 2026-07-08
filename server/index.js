@@ -15,7 +15,21 @@ const port = process.env.PORT;
 
 // Middlewares
 app.use(express.json());                             // parse incoming request bodies in a middleware before your handlers, available under the req.body property
-app.use(cors({ origin: "http://localhost:3000" }));  // allow requests from the React app
+const allowedOrigins = [
+  "http://localhost:3000",           // Local development
+  "http://localhost:5173",           // Vite alternative
+  process.env.FRONTEND_URL            // Production frontend URL from env variable
+];
+app.use(cors({ 
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));  // allow requests from the React app
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize()); // initialize the passport middleware
 
