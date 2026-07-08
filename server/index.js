@@ -18,7 +18,8 @@ app.use(express.json());                             // parse incoming request b
 const allowedOrigins = [
   "http://localhost:3000",           // Local development
   "http://localhost:5173",           // Vite alternative
-  process.env.FRONTEND_URL            // Production frontend URL from env variable
+  process.env.FRONTEND_URL,           // Production frontend URL from env variable
+  "https://flash-backs.vercel.app"    // Current deployed frontend origin
 ];
 app.use(cors({ 
   origin: (origin, callback) => {
