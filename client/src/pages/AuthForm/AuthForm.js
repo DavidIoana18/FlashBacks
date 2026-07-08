@@ -23,6 +23,7 @@ function AuthForm () {
   const isRegistered = location.pathname === "/auth/login"; //State to check if the user is registered or not for login or register form
 
   const [error, setError] = useState(null);       // State for error message
+  const [message, setMessage] = useState(null);   // State for success message
               
    // after Google authentication fails, the backend redirects with an error message in the URL
   useEffect(() => {
